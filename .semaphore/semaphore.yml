@@ -5,8 +5,18 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Code quality checks
+  - name: Prepare libraries
     dependencies: []
+    task:
+      jobs:
+        - name: Setup
+          commands:
+            - sleep 10
+            - apt-get install -y vim
+            - echo "Vim  Installed"
+  - name: Code quality checks
+    dependencies:
+      - Prepare libraries
     task:
       jobs:
         - name: Lint
